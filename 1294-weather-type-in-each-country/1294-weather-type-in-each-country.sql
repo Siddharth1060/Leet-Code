@@ -6,6 +6,6 @@ case
     else 'Warm' end as weather_type
 from Countries c join Weather w
 on c.country_id= w.country_id
-where day BETWEEN "2019-11-01" AND "2019-11-30"
+where year(day)= 2019 and month(day)= 11
 group by c.country_id 
 
