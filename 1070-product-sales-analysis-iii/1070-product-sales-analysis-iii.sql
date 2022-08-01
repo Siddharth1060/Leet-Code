@@ -1,8 +1,12 @@
 # Write your MySQL query statement below
-select  s.product_id, 
-       s.year as first_year,
-       s.quantity,
-       s.price
-from sales s join product p on s.product_id=p.product_id
-where (s.year,s.product_id)  in (select min(year), product_id
-                        from sales group by product_id  )
+select  t.product_id, 
+        t.year as first_year,
+        t.quantity,
+        t.price
+from
+         (  select product_id,year,quantity,price,
+            rank() over( partition by product_id order by year ) rnk
+            from sales
+         ) as t
+where t.rnk= 1
+         
