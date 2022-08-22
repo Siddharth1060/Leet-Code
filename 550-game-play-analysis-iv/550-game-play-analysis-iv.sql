@@ -2,7 +2,7 @@
 with cte as(
     select *, 
     ifnull(lead(event_date,1) over(partition by player_id order by event_date asc),0) as nxt,
-    rank() over(partition by player_id order by event_date asc) as rnk
+    row_number() over(partition by player_id order by event_date asc) as rnk
     from activity
     
   
