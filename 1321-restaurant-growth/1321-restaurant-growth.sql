@@ -4,4 +4,4 @@ select distinct visited_on,
        round(sum(amount)OVER(order by visited_on RANGE between interval 6 day preceding and current row)/7,2) as average_amount
 
 from customer
-limit 1000 offset 6
+limit 30 offset 6
