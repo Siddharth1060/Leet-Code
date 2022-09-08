@@ -2,7 +2,7 @@ CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
 BEGIN
   RETURN (
       # Write your MySQL query statement below.
-      
+      select ifnull(
                     (
                           select distinct salary
                           from (
@@ -12,7 +12,7 @@ BEGIN
                           where r.rnk=n
 
                     )
-                   
+                    ,null)
 
   );
 END
