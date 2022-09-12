@@ -1,7 +1,7 @@
 # Write your MySQL query statement below
 with cte as
 (
-    select log_id, row_number() over(order by log_id) as rno, dense_rank() over(order by log_id) as rnk
+    select log_id, row_number() over(order by log_id) as rno
     from logs
 )
 
