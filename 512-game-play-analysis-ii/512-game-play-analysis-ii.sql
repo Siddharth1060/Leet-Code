@@ -1,8 +1,9 @@
 # Write your MySQL query statement below
 select player_id, device_id
-from activity
-where (player_id,event_date) in (select player_id, min(event_date)
-                      from activity
-                      group by player_id
-                      
-                      )
+from (
+        select * ,dense_rank() over(partition by player_id order by event_date) as rnk
+        from activity
+
+        )t
+        
+where rnk=1
