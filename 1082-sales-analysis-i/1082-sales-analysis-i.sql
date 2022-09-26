@@ -1,8 +1,7 @@
 # Write your MySQL query statement below
- select seller_id
-from sales
-group by seller_id
-having sum(price) >= all(select sum(price)
-                     from sales
-                     group by seller_id
-                    )
+select seller_id
+from ( select seller_id, dense_rank() over(  order by sum(price) desc) rnk
+        from sales
+        group by seller_id
+        )t
+where rnk=1
