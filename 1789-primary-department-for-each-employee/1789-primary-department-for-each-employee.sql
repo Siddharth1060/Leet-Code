@@ -1,12 +1,11 @@
 # Write your MySQL query statement below
-select employee_id, 
-       department_id
-from employee
-where  primary_flag='Y'
-union
 
-select employee_id,
-       department_id
+select employee_id, department_id
 from employee
-group by 1
-having count(department_id)=1
+where primary_flag='Y'
+group by employee_id
+union 
+select employee_id, department_id
+from employee
+group by employee_id
+having count(distinct department_id) =1 
