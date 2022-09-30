@@ -1,8 +1,16 @@
 # Write your MySQL query statement below
-select "[0-5>" as bin, count(*) as total from Sessions where (duration/60)<5
-union
-select "[5-10>" as bin, count(*) as total from Sessions where duration/60 <10 and duration/60 > 5
-union
-select "[10-15>" as bin, count(*) as total from Sessions where duration/60 < 15 and duration/60 > 10
-union
-select "15 or more" as bin, count(*) as total from Sessions where duration/60 > 15 and duration/60 > 15
+select '[0-5>' as bin,
+        sum(case when duration >= 0 and duration <=300 then 1 else 0 end) as total 
+from sessions
+union all
+select '[5-10>' as bin,
+        sum(case when duration > 300 and duration <=600 then 1 else 0 end) as total 
+from sessions
+union all
+select '[10-15>' as bin,
+        sum(case when duration > 600 and duration <=900 then 1 else 0 end) as total 
+from sessions
+union all
+select '15 or more' as bin,
+        sum(case when duration > 900  then 1 else 0 end) as total 
+from sessions
