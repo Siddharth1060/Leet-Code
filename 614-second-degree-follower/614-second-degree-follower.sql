@@ -1,17 +1,13 @@
 # Write your MySQL query statement below
-with follows as(
-select
-    followee,
-    follower,
-    count(followee) over(partition by followee ) as follower_count
-    
-from Follow
-where followee in (select follower from follow)
-)
 
-select distinct followee as follower, follower_count as num
-from follows
-
-
-
-
+select name as follower, follower_count as num
+from
+(select followee as name ,count(follower) as follower_count
+from follow
+group by followee
+)t 
+where t.name in
+(select  distinct followee
+from follow
+where  followee in (select follower from follow))
+order by 1
