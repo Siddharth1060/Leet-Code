@@ -1,7 +1,8 @@
 # Write your MySQL query statement below
 select (case 
-        when id % 2 =1 then lead(id,1,id) over(order by id) 
-        when id % 2 =0 then lag(id,1,id) over(order by id)
+        when id = (select count(id) from seat) and id % 2 = 1 then id
+        when id % 2 =1 then id+1 
+        when id % 2 =0 then id-1   
         end) as id,
        student
 from 
