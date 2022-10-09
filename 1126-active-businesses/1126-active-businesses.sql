@@ -1,13 +1,16 @@
 # Write your MySQL query statement below
-select e.business_id
-from events e join 
-(
-select event_type, sum(occurences)/count(event_type) as avg_act
-from events
-group by event_type
-)t  
-on e.event_type=t.event_type 
-where e.occurences> t.avg_act
-group by e.business_id
-having count(e.business_Id)>1
-order by business_id
+
+                
+
+
+
+
+select business_id
+from events e1 join  
+                    (select business_id id,event_type event, avg(occurences) as cnt
+                     from events 
+                     group by event) e2 
+                on e1.event_type= e2.event
+where e1.occurences> e2.cnt
+group by business_id
+having count(occurences)>1
