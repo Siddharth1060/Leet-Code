@@ -1,14 +1,17 @@
 # Write your MySQL query statement below
-select e.left_operand,
-       e.operator,
-       e.right_operand,
-       (case 
-        when e.operator= '>' and v1.value > v2.value then 'true'
-        when e.operator= '<' and v1.value < v2.value then 'true'
-        when e.operator= '=' and v1.value = v2.value then 'true'
-        else 'false'
-        end
-       ) as value
-from expressions e join variables v1 on v1.name=e.left_operand 
-                   join variables v2 on v2.name=e.right_operand
-
+select lft as left_operand,
+       operator, 
+       rt as right_operand,
+       case when value=1 then 'true' else 'false' end as value
+from
+(select v1.name as lft,
+       e.operator as operator, 
+       v2.name as rt,
+      (case when operator= ">" then v1.value > v2.value
+            when operator = "=" then v1.value = v2.value
+            when operator = "<" then v1.value < v2.value
+            end) as value
+        
+from expressions e join variables v1 on e.left_operand = v1.name
+                    join variables v2 on e.right_operand = v2.name
+                    )t
