@@ -4,12 +4,12 @@
 
 
 
-SELECT t.request_at AS Day, ROUND(SUM(IF(t.status != 'completed', 1,0))/COUNT(*), 2) AS "Cancellation Rate"
-	FROM trips t
-JOIN users u
-	ON t.client_id = u.users_id
-JOIN users d
-	ON t.driver_id = d.users_id
-WHERE u.banned = 'No' AND d.banned = 'No' AND t.request_at BETWEEN "2013-10-01" AND "2013-10-03"
-GROUP BY  t.request_at
+
+select request_at as Day, 
+       round(sum(case when t.status<>'completed' then 1 else 0 end)/ count(*),2) as 'Cancellation Rate'
+from Trips t left join users u on t.client_id=u.users_id 
+             left join users ud on t.driver_id=ud.users_id
+where u.banned = 'No' and ud.banned='No' and t.request_at between "2013-10-01" and "2013-10-03"
+group by request_at
+
 
