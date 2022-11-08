@@ -1,15 +1,16 @@
 # Write your MySQL query statement below
-select id, sum(case when month= 'Jan' then revenue end) as Jan_Revenue,
-            sum(case when month= 'Feb' then revenue end) as Feb_Revenue,
-            sum(case when month= 'Mar' then revenue end) as Mar_Revenue,
-            sum(case when month= 'Apr' then revenue end) as Apr_Revenue,
-            sum(case when month= 'May' then revenue end) as May_Revenue,
-            sum(case when month= 'Jun' then revenue end) as Jun_Revenue,
-            sum(case when month= 'Jul' then revenue end) as Jul_Revenue,
-            sum(case when month= 'Aug' then revenue end) as Aug_Revenue,
-            sum(case when month= 'Sep' then revenue end) as Sep_Revenue,
-            sum(case when month= 'Oct' then revenue end) as Oct_Revenue,
-            sum(case when month= 'Nov' then revenue end) as Nov_Revenue,
-            sum(case when month= 'Dec' then revenue end) as Dec_Revenue
-from department
+select id, 
+       sum(case when month= 'Jan' then Revenue end) as Jan_Revenue,
+       sum(case when month= 'Feb' then Revenue end) as Feb_Revenue,
+       sum(case when month= 'Mar' then Revenue end) as Mar_Revenue,
+       sum(case when month= 'Apr' then Revenue end) as Apr_Revenue,
+       sum(case when month= 'May' then Revenue end) as May_Revenue,
+       sum(case when month= 'Jun' then Revenue end) as Jun_Revenue,
+       sum(case when month= 'Jul' then Revenue end) as Jul_Revenue,
+       sum(case when month= 'Aug' then Revenue end) as Aug_Revenue,
+       sum(case when month= 'Sep' then Revenue end) as Sep_Revenue,
+       sum(case when month= 'Oct' then Revenue end) as Oct_Revenue,
+       sum(case when month= 'Nov' then Revenue end) as Nov_Revenue,
+       sum(case when month= 'Dec' then Revenue end) as Dec_Revenue
+from Department
 group by id
