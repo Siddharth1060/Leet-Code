@@ -6,9 +6,10 @@ class Solution(object):
         """
         x=str(x)
         rev= x[::-1]
-        print(x, rev)
+        if x<0:
+            return(False)
         
-        if(x == rev):
+        elif(x == rev):
             return(True)
         else:
             return(False)
